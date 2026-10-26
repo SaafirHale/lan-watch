@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{CSRF}}">
+  <title>lan-watch</title>
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="/static/icon.svg" alt="" width="28" height="28">
+      <div>
+        <h1>lan-watch</h1>
+        <p class="tagline">Domain Expansion: every device inside the boundary is seen.</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="privacy" class="ghost" aria-pressed="false" title="Mask MACs, IPs and names for screenshots">Privacy view</button>
+      <button id="refresh" class="ghost">Refresh</button>
+    </div>
+  </header>
+
+  <section class="status" id="status" aria-live="polite"></section>
+
+  <main class="grid">
+    <section class="panel devices">
+      <div class="panel-head">
+        <h2>Devices</h2>
+        <div class="filters" role="tablist">
+          <button data-filter="all" class="chip active">All</button>
+          <button data-filter="unknown" class="chip">Unknown</button>
+          <button data-filter="known" class="chip">Known</button>
+          <button data-filter="private" class="chip">Private MAC</button>
+        </div>
+        <input id="search" type="search" placeholder="Filter by name, vendor, IP" aria-label="Filter devices">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th></th><th>Device</th><th>IP</th><th>MAC</th><th>First seen</th><th>Last seen</th><th></th></tr>
+          </thead>
+          <tbody id="device-rows"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="no-devices" hidden>No devices yet. Run <code>lanwatch run</code> on the confirmed network.</p>
+    </section>
+
+    <aside class="side">
+      <section class="panel">
+        <h2>Timeline</h2>
+        <ol class="timeline" id="timeline"></ol>
+      </section>
+      <section class="panel explainer">
+        <h2>Why some devices say "private MAC"</h2>
+        <p>Every network card ships with a vendor-assigned MAC. Modern phones, tablets and laptops replace it on Wi-Fi with a random one to stop tracking across networks. Random addresses set the <em>locally administered</em> bit, so the second hex digit is 2, 6, A or E (for example <code>x2:..</code> or <code>xA:..</code>).</p>
+        <p>lan-watch spots that bit, skips the vendor lookup (there is no vendor to find) and treats a new private MAC as "probably a phone you own" rather than an intruder: it is logged and summarised, not shouted about. A phone set to a fixed private address per network keeps it on your Wi-Fi, so once you mark it known it stays known. A device set to rotate shows up as new again; when it announces the same hostname, the timeline links it to the earlier entry.</p>
+        <p class="fine">Hostnames come from the network and can be spoofed, so a matching name is a hint, never automatic trust.</p>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="foot">lan-watch v{{VERSION}} · bound to 127.0.0.1 · passive-first, home subnet only</footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>

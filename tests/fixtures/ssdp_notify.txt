@@ -1,0 +1,9 @@
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+CACHE-CONTROL: max-age=1800
+LOCATION: http://192.168.50.31:8008/ssdp/device-desc.xml
+NT: urn:dial-multiscreen-org:service:dial:1
+NTS: ssdp:alive
+SERVER: Linux/3.8.13+, UPnP/1.0, Portable SDK for UPnP devices/1.6.18
+USN: uuid:0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0::urn:dial-multiscreen-org:service:dial:1
+

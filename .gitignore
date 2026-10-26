@@ -1,0 +1,20 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+# Runtime data never belongs in git: it holds real MACs, IPs and hostnames.
+# It lives in %LOCALAPPDATA%\lan-watch by default; these patterns are a backstop
+# in case LANWATCH_HOME is pointed inside the repo.
+*.sqlite3
+*.db
+confirmed-network.json
+oui*.csv
+mam.csv
+data/
+
+# Synthetic test fixtures are safe to commit.
+!tests/fixtures/*.csv

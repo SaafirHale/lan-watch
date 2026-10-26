@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lan-watch"
+version = "0.1.0"
+description = "Home-network device inventory and new-device alerting for Windows, passive first."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "Saafir Hale" }]
+# The runtime has no third-party dependencies on purpose: everything is stdlib
+# plus tools that ship with Windows (PowerShell, iphlpapi.dll).
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+lanwatch = "lanwatch.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+lanwatch = ["static/*", "ps/*.ps1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

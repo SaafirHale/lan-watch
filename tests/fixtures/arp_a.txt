@@ -1,0 +1,17 @@
+
+Interface: 192.168.50.23 --- 0x13
+  Internet Address      Physical Address      Type
+  192.168.50.1          a4-91-b1-12-34-56     dynamic
+  192.168.50.20         3c-7c-3f-1a-2b-4d     dynamic
+  192.168.50.31         f4-f5-d8-aa-bb-01     dynamic
+  192.168.50.44         da-a1-19-5e-22-07     dynamic
+  192.168.50.255        ff-ff-ff-ff-ff-ff     static
+  224.0.0.22            01-00-5e-00-00-16     static
+  224.0.0.251           01-00-5e-00-00-fb     static
+  239.255.255.250       01-00-5e-7f-ff-fa     static
+  255.255.255.255       ff-ff-ff-ff-ff-ff     static
+
+Interface: 172.27.96.1 --- 0x2a
+  Internet Address      Physical Address      Type
+  172.27.111.255        ff-ff-ff-ff-ff-ff     static
+  224.0.0.22            01-00-5e-00-00-16     static
