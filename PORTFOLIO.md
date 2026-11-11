@@ -16,12 +16,12 @@ Draft for `src/content/projects.ts` on saafirhale.com, in the shape of the site'
     "Everything from the network is treated as hostile input: the DNS, DHCP and NetBIOS parsers are bounds-checked against truncation and compression loops, names are sanitised, the dashboard renders with textContent only, and toast text is XML-escaped outside any code path. The dashboard binds to 127.0.0.1 and rejects foreign Host headers, cross-origin writes and requests without a CSRF token. The runtime is the Python standard library plus tools that ship with Windows, covered by 77 unit tests on synthetic ARP-table, adapter and wire-format packet fixtures.",
   ],
   stack: ["Python 3.12 (stdlib only)", "SQLite", "PowerShell", "Windows iphlpapi (SendARP)", "WinRT toasts", "Task Scheduler", "pytest"],
-  links: [],
-  status: "personal",
+  links: [{ label: "Source", href: "https://github.com/SaafirHale/lan-watch" }],
+  status: "live",
 }
 ```
 
 Notes for publishing:
 
-- `links` is empty and `status` is `"personal"` because the repo is not public yet. If it is pushed to GitHub, switch to `"live"` and add `{ label: "Source", href: "<repo URL>" }`.
+- The source is public at https://github.com/SaafirHale/lan-watch, so `status` is `"live"`.
 - `docs/dashboard.png` is the dashboard in privacy view (MACs cut to the vendor half, IPs to the last octet, network name hidden). It is safe to use as the project image.
