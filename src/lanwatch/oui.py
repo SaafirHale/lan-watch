@@ -20,6 +20,11 @@ IEEE_SOURCES = {
     "oui36.csv": "https://standards-oui.ieee.org/oui36/oui36.csv",
 }
 
+IANA_VIRTUAL = {
+    "00:00:5e:00:01:": "VRRP virtual router (IPv4)",
+    "00:00:5e:00:02:": "VRRP virtual router (IPv6)",
+}
+
 
 class OuiDatabase:
     def __init__(self) -> None:
@@ -46,6 +51,11 @@ class OuiDatabase:
         # "match" would be a coincidence. Say so instead of guessing.
         if is_locally_administered(mac):
             return None
+        # IANA's block holds protocol-defined virtual MACs (RFC 5798); naming
+        # the protocol says more than "ICANN, IANA Department".
+        for prefix, meaning in IANA_VIRTUAL.items():
+            if mac.startswith(prefix):
+                return meaning
         for digits in sorted(self._tables, reverse=True):  # longest prefix first
             hit = self._tables[digits].get(oui_key(mac, digits))
             if hit:

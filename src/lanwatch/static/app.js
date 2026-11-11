@@ -107,7 +107,7 @@ function renderDevices() {
         d.known ? el("span", { class: "badge known" }, "known") : el("span", { class: "badge unknown" }, "unknown"),
         d.randomized ? el("span", { class: "badge private", title: "Locally administered (randomised) MAC" }, "private MAC") : null),
       el("div", { class: "sub" },
-        [d.vendor || (d.randomized ? "no vendor (random address)" : "vendor not in OUI list"),
+        [displayName(d) === d.vendor ? null : d.vendor || (d.randomized ? "no vendor (random address)" : "vendor not in OUI list"),
          d.hostname && d.label ? d.hostname : null,
          d.model_hint].filter(Boolean).join(" · ")),
     );

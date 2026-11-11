@@ -83,7 +83,7 @@ def build_state(inv: Inventory, confirmed: ConfirmedNetwork | None, privacy: boo
     network = None
     if confirmed:
         network = {
-            "profile": mtxt(confirmed.profile_name),
+            "profile": "•••••" if privacy and confirmed.profile_name else confirmed.profile_name,  # the Wi-Fi name is an identifier
             "cidr": mip(confirmed.cidr),
             "gateway": mip(confirmed.gateway_ip),
             "interface": confirmed.interface_alias,

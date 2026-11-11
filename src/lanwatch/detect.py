@@ -187,9 +187,9 @@ def analyze(inv: Inventory, run_id: int, observations: list[Observation], ctx: C
                 updates["hostname"], updates["hostname_source"] = a.hostname, a.hostname_source
             if a.model_hint and not row["model_hint"]:
                 updates["model_hint"] = a.model_hint
-            if not row["vendor"] and ctx.oui:
-                vendor = ctx.oui.lookup(mac)
-                if vendor:
+            if ctx.oui:
+                vendor = ctx.oui.lookup(mac)  # picks up refreshed OUI data
+                if vendor and vendor != row["vendor"]:
                     updates["vendor"] = vendor
             inv.update_device(mac, **updates)
 

@@ -43,3 +43,4 @@ def test_oui_longest_prefix_and_laa():
     assert db.lookup("70:b3:d5:99:00:00") == "IEEE Registration Authority"
     assert db.lookup("da:a1:19:5e:22:07") is None                    # LAA never gets a vendor
     assert db.lookup("00:11:22:33:44:55") is None
+    assert db.lookup("00:00:5e:00:01:0a") == "VRRP virtual router (IPv4)"  # works even without the CSVs

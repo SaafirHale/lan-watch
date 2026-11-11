@@ -67,7 +67,7 @@ def test_state_and_privacy_masking(server):
     _, body = request(port, "GET", "/api/state?privacy=1")
     text = body.decode()
     assert "3c:7c:3f:1a:2b:4d" not in text and "192.168.50.20" not in text and "DESKTOP-7Q2LM" not in text
-    assert "HomeNet" not in text and "192.168.50.0" not in text
+    assert "HomeNet" not in text and "Hom" not in text and "192.168.50.0" not in text
     state = json.loads(body)
     assert state["devices"][0]["mac"] == "3c:7c:3f:••:••:••"
     assert state["devices"][0]["id"] is None

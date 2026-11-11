@@ -59,7 +59,7 @@ def cmd_confirm(args) -> int:
         print(f"  Gateway    {iface.gateway}")
         print(f"  Profile    {iface.profile_name or '-'}")
     for name in snap.umbrella_running:
-        print(f"  Note: {name} is running (DNS filtering only; it does not change the LAN).")
+        print(f"  Note: {name} is running (DNS/web filtering; it does not change the LAN).")
     if problems:
         print("\nRefusing to confirm:")
         for p in problems:

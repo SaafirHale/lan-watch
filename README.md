@@ -45,7 +45,7 @@ Not required and not installed. Everything above works with what Windows ships: 
 py -3.12 -m venv .venv
 .venv\Scripts\python -m pip install setuptools
 .venv\Scripts\python -m pip install --no-build-isolation -e ".[dev]"
-.venv\Scripts\python -m lanwatch update-oui     # ~6 MB of IEEE CSVs into %LOCALAPPDATA%\lan-watch
+.venv\Scripts\python -m lanwatch update-oui     # about 5 MB of IEEE CSVs into %LOCALAPPDATA%\lan-watch
 ```
 
 ## Use
