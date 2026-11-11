@@ -70,3 +70,14 @@ def test_active_request_without_opt_in_stays_passive(tmp_path, confirmed, toasts
                       read_neighbors=neighbors_fixture, toast_sender=sender_into(toasts))
     assert report.status == "ok"
     assert any("active discovery refused" in n for n in report.notes)
+
+
+def test_default_data_dir_avoids_virtualised_appdata(monkeypatch):
+    from pathlib import Path
+
+    from lanwatch.runner import data_dir
+
+    monkeypatch.delenv("LANWATCH_HOME", raising=False)
+    assert data_dir() == Path.home() / ".lan-watch"
+    monkeypatch.setenv("LANWATCH_HOME", "D:/elsewhere")
+    assert data_dir() == Path("D:/elsewhere")

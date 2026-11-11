@@ -210,7 +210,7 @@ def cmd_notify_test(args) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="lanwatch", description=f"lan-watch {__version__}  - {TAGLINE}: home-network inventory, passive first.")
-    p.add_argument("--home", help="data directory (default %%LOCALAPPDATA%%\\lan-watch or $LANWATCH_HOME)")
+    p.add_argument("--home", help="data directory (default %%USERPROFILE%%\\.lan-watch or $LANWATCH_HOME)")
     sub = p.add_subparsers(dest="command", required=True)
 
     sub.add_parser("status", help="show the live network and what the safety gate allows").set_defaults(func=cmd_status)

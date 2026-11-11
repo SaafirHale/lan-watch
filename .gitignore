@@ -7,7 +7,7 @@ build/
 dist/
 
 # Runtime data never belongs in git: it holds real MACs, IPs and hostnames.
-# It lives in %LOCALAPPDATA%\lan-watch by default; these patterns are a backstop
+# It lives in %USERPROFILE%\.lan-watch by default; these patterns are a backstop
 # in case LANWATCH_HOME is pointed inside the repo.
 *.sqlite3
 *.db

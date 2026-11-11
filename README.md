@@ -22,7 +22,7 @@ lan-watch keeps an inventory of every device on one home network and raises a Wi
 
 This laptop sometimes runs a corporate VPN and DNS-filtering client. lan-watch is built so that pointing it at anything other than the home LAN is impossible, not merely discouraged.
 
-1. **One human confirmation.** `lanwatch confirm` reads the interface carrying the default route and shows its subnet, gateway, gateway MAC and Windows network profile. You confirm by *typing the subnet*. It refuses outright if a VPN or tunnel adapter is up, if the subnet is not RFC 1918, or if it is larger than a /22 (1022 hosts: a home, never a corporate range). The confirmation lives in `%LOCALAPPDATA%\lan-watch`, outside the repo, and is re-validated on every load, so a hand-edited file cannot widen it.
+1. **One human confirmation.** `lanwatch confirm` reads the interface carrying the default route and shows its subnet, gateway, gateway MAC and Windows network profile. You confirm by *typing the subnet*. It refuses outright if a VPN or tunnel adapter is up, if the subnet is not RFC 1918, or if it is larger than a /22 (1022 hosts: a home, never a corporate range). The confirmation lives in `%USERPROFILE%\.lan-watch`, outside the repo, and is re-validated on every load, so a hand-edited file cannot widen it.
 2. **Every run re-checks before reading anything.** Interface, subnet, gateway and profile name must match the confirmation, the default route must be on that interface and no VPN adapter may be up. If anything differs (office, café, VPN connected), the run records a "skipped" entry and stops *before* reading the neighbor table, so nothing from another network is ever stored.
 3. **Passive by default.** A default run sends no packets. It reads the Windows neighbor (ARP) cache and, with `--listen N`, listens for mDNS, SSDP, DHCP and NetBIOS broadcasts.
 4. **Active is opt-in twice and structurally fenced.** Active discovery needs `allow_active` at confirmation *and* `--active` on the run, and it pauses automatically if the gateway MAC has changed. Probes in `active.py` cannot be called without an `ActiveAuthorization`, which only `safety.authorize_active()` can create, and every probe passes each target through `check_target()`: RFC 1918, inside the confirmed subnet, not the network or broadcast address, not this machine.
@@ -45,7 +45,7 @@ Not required and not installed. Everything above works with what Windows ships: 
 py -3.12 -m venv .venv
 .venv\Scripts\python -m pip install setuptools
 .venv\Scripts\python -m pip install --no-build-isolation -e ".[dev]"
-.venv\Scripts\python -m lanwatch update-oui     # about 5 MB of IEEE CSVs into %LOCALAPPDATA%\lan-watch
+.venv\Scripts\python -m lanwatch update-oui     # about 5 MB of IEEE CSVs into %USERPROFILE%\.lan-watch
 ```
 
 ## Use

@@ -20,8 +20,11 @@ def data_dir() -> Path:
     override = os.environ.get("LANWATCH_HOME")
     if override:
         return Path(override)
-    base = os.environ.get("LOCALAPPDATA") or str(Path.home())
-    return Path(base) / "lan-watch"
+    # Not %LOCALAPPDATA%: Windows silently redirects AppData writes made from
+    # packaged (MSIX) apps into a private per-app copy, so a terminal inside
+    # such an app and the scheduled task would each see different data. The
+    # profile root is never virtualised.
+    return Path.home() / ".lan-watch"
 
 
 def db_path(home: Path | None = None) -> Path:
